@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Payment Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(to bottom right, #00B300, #008000);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo-icon {
+            font-size: 40px;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .features {
+            margin-top: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .feature i {
+            font-size: 20px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .right-panel {
+            flex: 1.2;
+            padding: 40px;
+        }
+        
+        .form-header {
+            margin-bottom: 30px;
+        }
+        
+        .form-header h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00B300;
+        }
+        
+        .input-with-icon input, .input-with-icon select {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-with-icon input:focus, .input-with-icon select:focus {
+            border-color: #00B300;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 179, 0, 0.1);
+        }
+        
+        .phone-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .country-code {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 2px solid #e1e5eb;
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .phone-input input {
+            border-radius: 0 10px 10px 0;
+            padding-left: 15px;
+        }
+        
+        .amount-input {
+            display: flex;
+            align-items: center;
+        }
+        
+        .currency {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border: 2px solid #e1e5eb;
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .amount-input input {
+            border-radius: 0 10px 10px 0;
+            padding-left: 15px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #00B300, #008000);
+            color: white;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #00A300, #007000);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 179, 0, 0.2);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .info-note {
+            background-color: #f0f9ff;
+            border-left: 4px solid #00B300;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .info-note i {
+            color: #00B300;
+            margin-right: 8px;
+        }
+        
+        .validation-error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                padding: 30px;
+            }
+            
+            .right-panel {
+                padding: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="logo-text">M-Pesa</div>
+            </div>
+            
+            <h3>Secure Mobile Payments</h3>
+            <p>Fast, safe and convenient way to make payments directly from your mobile phone.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h4>Secure Transactions</h4>
+                        <p>Bank-level encryption for all payments</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <div>
+                        <h4>Instant Processing</h4>
+                        <p>Payments are processed in real-time</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-headset"></i>
+                    <div>
+                        <h4>24/7 Support</h4>
+                        <p>Help available anytime you need it</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="form-header">
+                <h2>M-Pesa Payment Details</h2>
+                <p>Enter your M-Pesa phone number and payment information</p>
+            </div>
+            
+            <form id="mpesaForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" placeholder="Enter your full name">
+                    </div>
+                    <div class="validation-error" id="nameError">Please enter your full name</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNumber">M-Pesa Phone Number</label>
+                    <div class="phone-input">
+                        <div class="country-code">+254</div>
+                        <div class="input-with-icon" style="flex: 1;">
+                            <input type="tel" id="phoneNumber" placeholder="7XX XXX XXX" maxlength="9">
+                        </div>
+                    </div>
+                    <div class="validation-error" id="phoneError">Please enter a valid 9-digit Safaricom number (e.g., 712345678)</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">Amount (KES)</label>
+                        <div class="amount-input">
+                            <div class="currency">KES</div>
+                            <div class="input-with-icon" style="flex: 1;">
+                                <input type="number" id="amount" placeholder="0.00" min="1" step="0.01">
+                            </div>
+                        </div>
+                        <div class="validation-error" id="amountError">Please enter a valid amount (minimum 1 KES)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paymentType">Payment Type</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-credit-card"></i>
+                            <select id="paymentType">
+                                <option value="">Select payment type</option>
+                                <option value="paybill">PayBill</option>
+                                <option value="till">Buy Goods & Services</option>
+                                <option value="sendmoney">Send Money</option>
+                            </select>
+                        </div>
+                        <div class="validation-error" id="typeError">Please select a payment type</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="accountNumber">Account Number (Optional)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-file-invoice"></i>
+                        <input type="text" id="accountNumber" placeholder="For PayBill payments only">
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-lock"></i> Confirm Payment Details
+                </button>
+                
+                <div class="info-note">
+                    <i class="fas fa-info-circle"></i>
+                    You will receive an M-Pesa prompt on your phone to enter your PIN to complete the transaction.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mpesaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let isValid = true;
+            
+            // Reset previous errors
+            document.querySelectorAll('.validation-error').forEach(error => {
+                error.style.display = 'none';
+            });
+            
+            // Validate full name
+            const fullName = document.getElementById('fullName').value.trim();
+            if (fullName === '') {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate phone number
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const phoneRegex = /^[17][0-9]{8}$/; // Safaricom numbers start with 1 or 7
+            if (!phoneRegex.test(phoneNumber)) {
+                document.getElementById('phoneError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate amount
+            const amount = document.getElementById('amount').value;
+            if (amount === '' || parseFloat(amount) < 1) {
+                document.getElementById('amountError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // Validate payment type
+            const paymentType = document.getElementById('paymentType').value;
+            if (paymentType === '') {
+                document.getElementById('typeError').style.display = 'block';
+                isValid = false;
+            }
+            
+            // If form is valid, process submission
+            if (isValid) {
+                // In a real application, you would send this data to your server
+                const formData = {
+                    fullName: fullName,
+                    phoneNumber: '+254' + phoneNumber,
+                    amount: amount,
+                    paymentType: paymentType,
+                    accountNumber: document.getElementById('accountNumber').value.trim()
+                };
+                
+                // Show success message
+                alert(`Payment details submitted successfully!\n\nM-Pesa prompt will be sent to: ${formData.phoneNumber}\nAmount: KES ${formData.amount}\nPayment Type: ${formData.paymentType}`);
+                
+                // Reset form
+                document.getElementById('mpesaForm').reset();
+                
+                // You would typically submit the form data to a server here
+                // Example: fetch('/process-mpesa', { method: 'POST', body: JSON.stringify(formData) })
+            }
+        });
+        
+        // Format phone number as user types
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 9) value = value.substring(0, 9);
+            
+            // Format with spaces for readability
+            if (value.length > 6) {
+                value = value.substring(0, 3) + ' ' + value.substring(3, 6) + ' ' + value.substring(6);
+            } else if (value.length > 3) {
+                value = value.substring(0, 3) + ' ' + value.substring(3);
+            }
+            
+            e.target.value = value;
+        });
+        
+        // Show/hide account number field based on payment type
+        document.getElementById('paymentType').addEventListener('change', function(e) {
+            const accountField = document.getElementById('accountNumber');
+            if (e.target.value === 'paybill') {
+                accountField.placeholder = "Enter account number (required for PayBill)";
+                accountField.disabled = false;
+            } else {
+                accountField.placeholder = "For PayBill payments only";
+                accountField.disabled = true;
+                accountField.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
